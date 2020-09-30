@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin,login_manager
 from flask_admin import Admin,AdminIndexView
 from flask_admin .contrib.sqla import ModelView
+from flask_security import UserMixin,RoleMixin
 
 class schools(db.Model):
     __tablename__ = 'schools'
@@ -19,3 +20,9 @@ class facilitator(db.Model):
     schools = db.relationship('schools',backref = 'admin',lazy ='dynamic')
     def __repr__(self):
         return f'User {self.username}'
+
+class User(db,model,UserMixin)
+    id = db.Column(db,Interger,primary_key=True)
+    email = db.Column(db.String(100), unique=True)
+    password = db.column(db,string(255))
+    active = db.Column(db.Boolean)
