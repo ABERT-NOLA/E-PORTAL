@@ -21,8 +21,12 @@ class facilitator(db.Model):
     def __repr__(self):
         return f'User {self.username}'
 
-class User(db,model,UserMixin)
+class User(db,Model,UserMixin)
     id = db.Column(db,Interger,primary_key=True)
     email = db.Column(db.String(100), unique=True)
     password = db.column(db,string(255))
     active = db.Column(db.Boolean)
+
+class Role(db,Model,RoleMixin)
+    id = db.Column(db,Interger,primary_key=True)
+    name= db.Column(db.String(100), unique=True)
