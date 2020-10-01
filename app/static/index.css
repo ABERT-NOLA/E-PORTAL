@@ -1,0 +1,12 @@
+.container-fluid{
+    font-family: 'Laila', serif;
+    margin: 20px;
+    padding: 20px;
+    border: 20px;
+    /* background-color:rgb(158, 158, 114); */
+    /* color: black; */
+  }
+  .container{
+    background-color:rgb(199, 199, 153);
+    border: 20px;
+  }

@@ -1,0 +1,21 @@
+{% extends 'base.html'%}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block styles%}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static',filename='index.css')}}">
+<link href="https://fonts.googleapis.com/css?family=Laila" rel="stylesheet">
+{% endblock %}
+{% block content %}
+
+<div class="col-md-4">
+
+  {{ wtf.quick_form(comment_form) }}
+
+  {% for comment in book.comment %}
+  <p class="card-title">{{comment.user}}</p>
+
+  <p class="card-text">{{comment.description}}</p>
+  <button><a href="{{url_for('main.delete_comment', id=comment.id)}}">delete</a></button>
+</div>
+{% endfor %}
+{% endblock %}

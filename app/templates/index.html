@@ -1,0 +1,44 @@
+{% extends 'base.html'%}
+{% import 'bootstrap/wtf.html' as wtf%}
+{% block styles%}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static',filename='index.css')}}">
+<link href="https://fonts.googleapis.com/css?family=Laila" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<blockquote class="text-center text-lg">
+  <br><br>
+  <div class="container-fluid">
+    <h1 style='text-align:center;'>Welcome to Virtual School</h1>
+  </div>
+  <button><a class="btn btn-basic btn md" href="/new_book">Click here to post a new Resourse/Book</a></button>
+  <!-- <a class="btn btn-basic btn md" href="/subscribe" style="float:center;">subscribe</a> -->
+  {% for book in all_books %}
+  <div class="container-fluid">
+    <div class="card-deck">
+      <div class="card">
+        <div class="card-body">
+
+          <p>{{book.book}}</p>
+
+        </div>
+        <div class="card-header" style='text-align:center;'>
+          <h5>{{book.user}}</h5>
+        </div>
+
+        <br>
+        <div class="card-footer">
+          <div class="container-fluid write">
+            <button><a class="btn btn-basic btn-md" href="/comment/new/{{book.id}}">Leave a comment</a></button>
+            <button><a class="btn btn-light btn-xl sr-button" href="{{url_for('main.delete_books',id = book.id)}}"> Delete</a></button>
+
+          </div>
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+
+  {% endfor %}
+  </div>
+  {% endblock%}
