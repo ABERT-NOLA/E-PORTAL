@@ -1,32 +1,34 @@
-from .import db
-from werkzeug.security import generate_password_hash,check_password_hash
-from flask_login import UserMixin,login_manager
-from flask_admin import Admin,AdminIndexView
-from flask_admin .contrib.sqla import ModelView
-from flask_security import UserMixin,RoleMixin
+from datetime import datetime
+from . import db
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin, current_user
+from . import login_manager
 
-class schools(db.Model):
-    __tablename__ = 'schools'
-    id = db.Column(db.Integer,primary_key = True)
-    username = db.Column(db.String(255))
-    admin_id = db.Column(db.Integer,db.foreignkey('admin.id'))
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
+class User(UserMixin, db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(255), index=True)
+    email = db.Column(db.String(255), unique=True, index=True)
+    bio = db.Column(db.String(255))
+    profile_pic_path = db.Column(db.String())
+    pass_secure = db.Column(db.String(255))
+
+    @property
+    def password(self):
+        raise AttributeError('You cannot read the password attribute')
+
+    @password.setter
+    def password(self, password):
+        self.pass_secure = generate_password_hash(password)
+
+    def verify_password(self, password):
+        return check_password_hash(self.pass_secure, password)
+
     def __repr__(self):
         return f'User {self.username}'
-
-class facilitator(db.Model):
-    __tablename__ = 'Facilitator'
-    id = db.Column(db.Integer,primary_key = True)
-    username = db.Column(db.String(255))
-    schools = db.relationship('schools',backref = 'admin',lazy ='dynamic')
-    def __repr__(self):
-        return f'User {self.username}'
-
-class User(db,Model,UserMixin)
-    id = db.Column(db,Interger,primary_key=True)
-    email = db.Column(db.String(100), unique=True)
-    password = db.column(db,string(255))
-    active = db.Column(db.Boolean)
-
-class Role(db,Model,RoleMixin)
-    id = db.Column(db,Interger,primary_key=True)
-    name= db.Column(db.String(100), unique=True)
