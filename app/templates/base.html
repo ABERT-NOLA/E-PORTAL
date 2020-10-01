@@ -33,7 +33,7 @@
         <div class="main-menu">
           <h5 class="sidenav-heading">Main</h5>
           <ul id="side-main-menu" class="side-menu list-unstyled">
-            <li><a href="index.html"> <i class="fa fa-home"></i>Home</a></li>
+            <li><a href="{{ url_for('main.index') }}"> <i class="fa fa-home"></i>Home</a></li>
             <li><a href="/"> <i class="fa fa-book"></i>Books</a></li>
             <li><a href="/"> <i class="fa fa-users"></i>Students</a></li>
             <li><a href="/"> <i class="fa fa-users"></i>Teachers</a></li>
@@ -69,7 +69,7 @@
                         <li><a href="{{ url_for('auth.login') }}">Sign in</a></li>
                     {% endif %}
                   <ul aria-labelledby="languages" class="dropdown-menu">
-                    <li><a rel="nofollow" href="#" class="dropdown-item"><span>Profile</span></a></li>
+                    <li><a rel="nofollow" href="{{url_for('main.profile',uname=current_user.username)}}" class="dropdown-item"><span>Profile</span></a></li>
                     <li><a rel="nofollow" href="{{url_for('auth.logout')}}" class="dropdown-item"> <span>Logout</span></a></li>
                   </ul>
                 </li>
