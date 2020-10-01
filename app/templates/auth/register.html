@@ -1,11 +1,13 @@
-{% extends 'base.html'%}
 {% import 'bootstrap/wtf.html' as wtf%}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
 
 {% block content %}
 <div class="container">
 <div class="row">
 <div class="col-md-2"> </div>
 <div class="col-md-8">
+    <h2 class="pt-4">Sign Up</h2>
 
 {{wtf.quick_form(registration_form)}}
 
