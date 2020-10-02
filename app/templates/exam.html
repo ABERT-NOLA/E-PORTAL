@@ -1,0 +1,34 @@
+{% extends 'base.html'%}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block content %}
+<div class="container">
+  {{wtf.quick_form(form)}}
+  {{simplemde.load}}
+
+</div>
+<div class="container">
+<h1 class="text-center">EXAMS</h1>
+{%if courses%}
+{% for items in exam  %}
+
+    <div class="card">
+    <div class="card-body text-center">
+      <h5>Module:{{items.course}}</h5>
+      <h5>Topic :{{ items.topic }}</h5>
+      <h5> Course: {{items.question}}</h5>
+    </div>
+    <div class="card-footer text-center">
+<a href="{{url_for('main.new_answer',exam_id=items.id)}}"><button class="btn btn-default">Answer</button></a>
+    </div>
+    
+    </div>
+{% endfor %}
+{%else%}
+
+
+<h1 class="text-center"> no exams available </h1>
+
+
+{%endif%}
+</div>
+{% endblock  %}
