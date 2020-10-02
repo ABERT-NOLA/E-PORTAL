@@ -2,26 +2,24 @@ import os
 
 
 class Config:
-    """
-    Parent configuration
-    """
-    SECRET_KEY = 'schoolvirtual'
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://roba:access@localhost/exam'
+
+    
     UPLOADED_PHOTOS_DEST = 'app/static/photos'
+    # simple mde  configurations
+    SIMPLEMDE_JS_IIFE = True
+    SIMPLEMDE_USE_CDN = True
 
 
-class ProdConfig(Config):
-    """
-    Production configuration
-    """
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
-
+    
 
 class DevConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:alex17176251@localhost/portal'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://roba:access@localhost/exam'
+    
     DEBUG = True
 
 
 config_options = {
-    'development': DevConfig,
-    'production': ProdConfig
+    'development': DevConfig
 }
